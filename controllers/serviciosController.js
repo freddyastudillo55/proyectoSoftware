@@ -27,7 +27,7 @@ const crearNuevoServicio = asyncHandler (async (req, res) => {
     //Verificar duplicados
     const duplicado = await Servicio.findOne({ nombre }).lean().exec()
     if(duplicado){
-                return res.status(409).json({ message: 'Nombre duplicado!'})
+        return res.status(409).json({ message: 'Nombre duplicado!'})
     }
 
     const servicioObj = { nombre, costo, descripcion}
@@ -91,9 +91,12 @@ const borrarServicio = asyncHandler (async (req, res) => {
 
     const resultado = await servicio.deleteOne()
 
-    const respuesta = `Servicio ${resultado.nombre} con ID ${resultado._id} fue borrado` 
+    if(resultado){
+        res.json({ message: `Servicio ${servicio.nombre} con ID ${servicio._id} fue eliminado` })
+    } else {
+        res.status(404).json({ message: 'Algo salió mal!' })
+    }
 
-    res.json(respuesta)
 })
 
 module.exports = {
