@@ -28,6 +28,9 @@ app.use('/', require('./routes/root'))
 app.use('/servicios', require('./routes/servicioRoutes'))
 app.use('/usuarios', require('./routes/usuarioRoutes'))
 app.use('/estilistas', require('./routes/estilistaRoutes'))
+app.use('/horariosServicio', require('./routes/horarioServicioRoutes'))
+app.use('/citas', require('./routes/citaRoutes'))
+app.use('/auth', require('./routes/authRoutes'))
 
 app.use((req, res, next) => {
   res.status(404);

@@ -1,4 +1,5 @@
 const Servicio = require('../models/Servicio')
+const HorarioServicio = require('../models/HorarioServicio')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt')
 
@@ -81,7 +82,10 @@ const borrarServicio = asyncHandler (async (req, res) => {
         return res.status(400).json({ message: 'Id de Servicio requerido'})
     }
 
-    //TODO Validar relaciones entre entidades
+    const horariosAsociados = await HorarioServicio.findOne({ servicio: id }).lean().exec()
+    if (horariosAsociados) {
+        return res.status(400).json({ message: 'No se puede eliminar: hay horarios asociados a este servicio' })
+    }
 
     const servicio = await Servicio.findById(id).exec()
 

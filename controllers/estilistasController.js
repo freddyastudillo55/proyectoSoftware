@@ -1,4 +1,5 @@
 const Estilista = require('../models/Estilista')
+const HorarioServicio = require('../models/HorarioServicio')
 const asyncHandler = require('express-async-handler')
 
 // @desc Obtener todos los estilistas
@@ -80,7 +81,11 @@ const borrarEstilista = asyncHandler (async (req, res) => {
         return res.status(400).json({ message: 'Id de Estilista requerido'})
     }
 
-    //TODO Validar relaciones entre entidades
+    const horariosAsociados = await HorarioServicio.findOne({ estilista: id }).lean().exec()
+
+    if (horariosAsociados) {
+        return res.status(400).json({ message: 'No se puede eliminar: hay horarios asociados a este estilista' })
+    }
 
     const estilista = await Estilista.findById(id).exec()
 

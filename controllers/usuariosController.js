@@ -115,7 +115,7 @@ const borrarUsuario = asyncHandler(async (req, res) => {
     if(result){
         res.json({ message: `Usuario ${user.usuario} con ID ${user._id} fue eliminado` })
     } else {
-        res.status(404).json({ message: 'Algo salio mal!' })
+        res.status(404).json({ message: 'Algo salió mal!' })
     }
 })
 
