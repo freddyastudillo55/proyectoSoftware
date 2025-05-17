@@ -1,6 +1,7 @@
 const { Usuario, Cliente, Administrador } = require('../models/Usuario')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt')
+const enviarCorreo = require('../utils/mailer')
 
 // @desc Obtener todos los usuarios
 // @route GET /usuarios
@@ -55,7 +56,8 @@ const crearUsuario = asyncHandler(async (req, res) => {
     }
 
     if (nuevoUsuario) {
-        //TODO crear funcion para notificar por correo la creacion del usuario
+        // Enviar correo de confirmación
+        await enviarCorreo(correo, nombre);
         res.status(201).json({ message: `Usuario ${tipo} creado` })
     } else {
         res.status(400).json({ message: 'Datos inválidos' })

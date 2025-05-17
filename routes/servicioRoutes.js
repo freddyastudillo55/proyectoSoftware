@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const serviciosController = require('../controllers/serviciosController')
-const verifyJWT = require('../middleware/verifyJWT')
 
-router.use(verifyJWT)
+//En caso de querer usar autenticacion por JWT descomentar
+//const verifyJWT = require('../middleware/verifyJWT')
+//router.use(verifyJWT)
 
 router.route('/')
     .get(serviciosController.obtenerServicios)
