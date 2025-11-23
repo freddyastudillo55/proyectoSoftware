@@ -1,0 +1,9 @@
+admin - kTCpTLODCU6JIhpo
+
+developer - developer123
+
+npm install mongodb
+
+DATABASE_URI=mongodb+srv://<db_username>:<db_password>@cluster0.jfn7srh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+DATABASE_URI=mongodb+srv://developer:developer123@cluster0.jfn7srh.mongodb.net/ckarlosPeluqueria?retryWrites=true&w=majority&appName=Cluster0
